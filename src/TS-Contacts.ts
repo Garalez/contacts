@@ -36,7 +36,6 @@ const persons: Person[] = [
   {
     name: 'admin',
     age: 28,
-    group: 'qwe',
     role: 'администратор',
   },
 ];
