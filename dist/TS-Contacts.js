@@ -29,15 +29,15 @@ const persons = [
 const isAdmin = (person) => 'role' in person;
 const isUser = (person) => 'group' in person;
 const logPerson = (persons, userType) => {
-    console.log(`${userType}: `);
-    persons.forEach((person) => {
-        if (isAdmin(person) && userType === 'Admins') {
-            console.log(`${person.name}, ${person.age}, ${person.role}`);
-        }
-        if (isUser(person) && userType === 'Users') {
-            console.log(`${person.name}, ${person.age}, ${person.group}`);
-        }
-    });
+    console.log(userType);
+    persons
+        .filter((person) => {
+        if (userType === 'Admins')
+            return isAdmin(person);
+        if (userType === 'Users')
+            return isUser(person);
+    })
+        .forEach((person) => console.log(Object.values(person).join(', ')));
 };
 logPerson(persons, 'Admins');
 console.log();
