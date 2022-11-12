@@ -43,21 +43,20 @@ const persons: Person[] = [
 const isAdmin = (person: Person): person is Admin => 'role' in person;
 const isUser = (person: Person): person is User => 'group' in person;
 
-const logPerson = (person: Person) => {
-  let information: string = '';
-  if (isAdmin(person)) {
-    information = person.role;
-  }
-  if (isUser(person)) {
-    information = person.group;
-  }
-  console.log(`${person.name}, ${person.age}, ${information}`);
+const logPerson = (persons: Person[], userType: 'Admins' | 'Users') => {
+  console.log(`${userType}: `);
+
+  persons.forEach((person) => {
+    if (isAdmin(person) && userType === 'Admins') {
+      console.log(`${person.name}, ${person.age}, ${person.role}`);
+    }
+
+    if (isUser(person) && userType === 'Users') {
+      console.log(`${person.name}, ${person.age}, ${person.group}`);
+    }
+  });
 };
 
-console.log('Admins:');
-persons.filter(isAdmin).forEach(logPerson);
-
+logPerson(persons, 'Admins');
 console.log();
-
-console.log('Users:');
-persons.filter(isUser).forEach(logPerson);
+logPerson(persons, 'Users');
